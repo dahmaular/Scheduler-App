@@ -1,0 +1,380 @@
+.schedule-page .page-header {
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.schedule-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Export button group */
+.export-group {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btn-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.42rem 0.85rem;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: #fff;
+  color: #374151;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.btn-export:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.period-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.3rem 0.75rem;
+}
+
+.month-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.month-picker label { font-weight: 600; white-space: nowrap; }
+
+.month-picker input[type='month'] {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+/* Slot summary strip */
+.slot-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+}
+
+.slot-period { color: #374151; font-weight: 600; margin-right: 0.3rem; }
+
+.slot-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+}
+.pill-a     { background: #ede9fe; color: #6366f1; }
+.pill-b     { background: #e0f2fe; color: #0ea5e9; }
+.pill-c     { background: #d1fae5; color: #10b981; }
+.pill-total { background: #f3f4f6; color: #374151; }
+
+/* Panel (auto-generate / manual form) */
+.panel {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.4rem;
+}
+
+.panel-hint {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.auto-form { display: flex; flex-direction: column; gap: 1rem; }
+
+.auto-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.auto-form .form-group label,
+.manual-form .form-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.auto-form input[type='text'],
+.manual-form input[type='text'],
+.manual-form input[type='date'],
+.manual-form select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.auto-form input[type='text']:focus,
+.manual-form input:focus,
+.manual-form select:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: #374151;
+  cursor: pointer;
+}
+
+/* Slot preview box */
+.slot-preview {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  font-size: 0.88rem;
+}
+
+.slot-preview p { font-weight: 600; margin-bottom: 0.5rem; color: #374151; }
+
+.slot-preview ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+
+.slot-preview li { display: flex; align-items: center; gap: 0.5rem; color: #374151; }
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-a { background: #6366f1; }
+.dot-b { background: #0ea5e9; }
+.dot-c { background: #10b981; }
+
+.manual-form { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.manual-form .form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.manual-form .form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 180px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.schedule-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ── Schedule list view ─────────────────────────────────────────────────── */
+.sched-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #9ca3af;
+}
+.sched-empty-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+.sched-empty p    { font-size: 0.95rem; }
+
+.sched-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sched-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: box-shadow 0.15s, border-color 0.15s;
+  gap: 1rem;
+}
+.sched-card:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  border-color: #6366f1;
+}
+
+.sched-card-main { flex: 1; min-width: 0; }
+
+.sched-card-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sched-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.45rem;
+}
+
+.sched-card-dates {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.sched-card-count {
+  font-size: 0.8rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  border-radius: 99px;
+  padding: 0.1rem 0.55rem;
+}
+
+.sched-card-types {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.sched-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Open button */
+.btn-sched-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 1rem;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  box-shadow: 0 2px 6px rgba(99,102,241,0.25);
+}
+.btn-sched-open:hover {
+  background: #4f46e5;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.35);
+  transform: translateY(-1px);
+}
+.btn-sched-open:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.btn-sched-arrow {
+  display: inline-block;
+  transition: transform 0.15s;
+}
+.btn-sched-open:hover .btn-sched-arrow {
+  transform: translateX(3px);
+}
+
+/* Delete button */
+.btn-sched-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.45rem 1rem;
+  background: #fff;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #ef4444;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+  flex-shrink: 0;
+}
+.btn-sched-delete:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  box-shadow: 0 2px 6px rgba(239,68,68,0.18);
+  transform: translateY(-1px);
+}
+.btn-sched-delete:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ── Detail / back navigation ───────────────────────────────────────────── */
+.sched-detail-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.btn-back:hover { background: #f3f4f6; }

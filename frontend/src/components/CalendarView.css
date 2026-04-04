@@ -1,0 +1,207 @@
+/* ── CalendarView — roster grid ───────────────────────────────────────────── */
+
+.cv-wrapper {
+  overflow: hidden;
+}
+
+.cv-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.cv-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  min-width: 560px;
+}
+
+/* ── Column headers (WEEK 1, WEEK 2 …) ─────────────────────────────────── */
+.cv-row-label-header {
+  min-width: 110px;
+  background: #1e293b;
+}
+
+.cv-week-header {
+  background: #1e293b;
+  color: #fff;
+  text-align: center;
+  padding: 0.55rem 0.5rem 0.4rem;
+  border-left: 1px solid #334155;
+  min-width: 150px;
+}
+
+.cv-week-label {
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cv-week-date {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-top: 0.15rem;
+}
+
+/* ── Row labels ─────────────────────────────────────────────────────────── */
+.cv-row-label {
+  padding: 0.5rem 0.6rem;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  vertical-align: middle;
+  border-top: 2px solid #fff;
+  min-width: 100px;
+  line-height: 1.35;
+}
+
+.cv-label-line {
+  display: block;
+}
+
+/* Wednesday row label */
+.svc-c-label {
+  background: #0f4c75;
+  color: #fff;
+}
+
+/* 1st & 2nd Service row label */
+.svc-a-label {
+  background: #7c3aed;
+  color: #fff;
+}
+
+/* 3rd Service row label */
+.svc-b-label {
+  background: #0369a1;
+  color: #fff;
+}
+
+/* ── Cells ──────────────────────────────────────────────────────────────── */
+.cv-cell {
+  vertical-align: top;
+  padding: 0;
+  border: 1px solid #cbd5e1;
+  min-width: 150px;
+}
+
+.cv-cell-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.cv-cell-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  padding: 0.3rem 0.5rem 0.2rem;
+  text-align: center;
+}
+
+/* Wednesday cell */
+.svc-c-cell .cv-cell-date { background: #0284c7; }
+.svc-c-cell              { background: #f0f9ff; }
+
+/* 1st & 2nd Service cell */
+.svc-a-cell .cv-cell-date { background: #7c3aed; }
+.svc-a-cell              { background: #f5f3ff; }
+
+/* 3rd Service cell */
+.svc-b-cell .cv-cell-date { background: #0369a1; }
+.svc-b-cell              { background: #f0f9ff; }
+
+/* ── Member list inside a cell ──────────────────────────────────────────── */
+.cv-members {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.25rem 0.4rem 0.35rem;
+}
+
+.cv-member {
+  padding: 0.18rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #1e293b;
+  background: rgba(255,255,255,0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Lead member (red background, matching image) */
+.cv-member-lead {
+  background: #ef4444 !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.cv-cell-empty {
+  color: #cbd5e1;
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* ── Empty state ────────────────────────────────────────────────────────── */
+.cv-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* ── Month divider (optional, injected by grouping logic) ───────────────── */
+.cv-month-divider td {
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+  border-top: 2px solid #cbd5e1;
+}
+
+/* ── Team-lead legend ───────────────────────────────────────────────────── */
+.cv-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  border-top: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.cv-legend-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.cv-legend-lead {
+  background: #ef4444;
+}
+
+.cv-legend-text {
+  font-size: 0.74rem;
+  color: #64748b;
+  font-style: italic;
+}

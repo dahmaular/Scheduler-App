@@ -1,0 +1,54 @@
+.members-page .page-header {
+  margin-bottom: 1.25rem;
+}
+
+.member-count {
+  font-size: 0.88rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 0.3rem 0.8rem;
+  border-radius: 99px;
+}
+
+.members-table-wrapper {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.members-table th {
+  background: #f9fafb;
+  color: #6b7280;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.members-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.members-table tr.inactive-row td {
+  opacity: 0.5;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* reuse shared btn / status-badge from Dashboard.css */

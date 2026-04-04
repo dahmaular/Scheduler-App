@@ -1,0 +1,233 @@
+/* ── Daystar brand tokens ───────────────────────────────────────────────── */
+:root {
+  --ds-navy:        #0a1f44;
+  --ds-navy-mid:    #122550;
+  --ds-gold:        #c9a84c;
+  --ds-gold-light:  #f0d98c;
+  --ds-gold-pale:   #fdf6e3;
+  --ds-white:       #ffffff;
+  --ds-text:        #1a2940;
+  --ds-text-muted:  #6b7280;
+  --ds-border:      #e5e7eb;
+  --ds-bg:          #f8f9fc;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2.5rem;
+}
+
+.loading {
+  color: #9ca3af;
+  text-align: center;
+  padding: 3rem;
+}
+
+/* ── Hero banner ────────────────────────────────────────────────────────── */
+.dash-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: linear-gradient(135deg, var(--ds-navy) 0%, #163366 100%);
+  border-radius: 0 0 16px 16px;
+  padding: 1.6rem 2rem;
+  margin: 0 -1.5rem 2rem;
+  border-bottom: 3px solid var(--ds-gold);
+}
+
+.dash-hero-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.dash-hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.dash-hero-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--ds-white);
+  letter-spacing: 0.3px;
+}
+
+.dash-hero-sub {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #b0bec5;
+  letter-spacing: 0.3px;
+}
+
+.dash-hero-sub span {
+  color: var(--ds-gold);
+  font-style: italic;
+}
+
+/* ── Section title ──────────────────────────────────────────────────────── */
+.section-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ds-navy);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 1.75rem 0 0.9rem;
+  padding-left: 0.6rem;
+  border-left: 3px solid var(--ds-gold);
+}
+
+/* ── Stat cards ─────────────────────────────────────────────────────────── */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card {
+  background: var(--ds-white);
+  border: 1px solid var(--ds-border);
+  border-top: 3px solid var(--ds-gold);
+  border-radius: 10px;
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  box-shadow: 0 2px 8px rgba(10, 31, 68, 0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.stat-card:hover {
+  box-shadow: 0 6px 18px rgba(10, 31, 68, 0.12);
+  transform: translateY(-2px);
+}
+
+.stat-value {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--ds-navy);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: 600;
+}
+
+/* ── Empty state ────────────────────────────────────────────────────────── */
+.dash-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 3.5rem 1rem;
+  color: var(--ds-text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  background: var(--ds-white);
+  border: 1px dashed #d1d5db;
+  border-radius: 12px;
+}
+
+.dash-empty-icon {
+  font-size: 2.4rem;
+  opacity: 0.5;
+}
+
+/* ── Schedule list ──────────────────────────────────────────────────────── */
+.dash-sched-list {
+  display: flex;
+  flex-direction: column;
+  background: var(--ds-white);
+  border: 1px solid var(--ds-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(10, 31, 68, 0.06);
+}
+
+.dash-sched-row {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto auto auto 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: none;
+  border-bottom: 1px solid #f3f4f6;
+  background: var(--ds-white);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, border-left-color 0.15s;
+  font-family: inherit;
+  width: 100%;
+  border-left: 3px solid transparent;
+}
+
+.dash-sched-row:last-child {
+  border-bottom: none;
+}
+
+.dash-sched-row:hover {
+  background: var(--ds-gold-pale);
+  border-left-color: var(--ds-gold);
+}
+
+.dash-sched-row:hover .dash-sched-arrow {
+  transform: translateX(4px);
+  color: var(--ds-gold);
+}
+
+.dash-sched-row:hover .dash-sched-name {
+  color: var(--ds-navy);
+}
+
+.dash-sched-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  text-align: center;
+}
+
+.dash-sched-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ds-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.dash-sched-dates {
+  font-size: 0.78rem;
+  color: var(--ds-text-muted);
+  white-space: nowrap;
+}
+
+.dash-sched-types {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: nowrap;
+}
+
+.dash-sched-count {
+  font-size: 0.78rem;
+  color: var(--ds-text-muted);
+  white-space: nowrap;
+  background: #f3f4f6;
+  padding: 0.15rem 0.55rem;
+  border-radius: 99px;
+}
+
+.dash-sched-arrow {
+  font-size: 1rem;
+  color: #9ca3af;
+  transition: transform 0.15s, color 0.15s;
+}
