@@ -37,6 +37,17 @@
   border-color: #9ca3af;
 }
 
+/* ICS export button — teal/calendar accent */
+.btn-export-ics {
+  border-color: #0d9488;
+  color: #0d9488;
+}
+.btn-export-ics:hover {
+  background: #f0fdfa;
+  border-color: #0d9488;
+  color: #0d9488;
+}
+
 .period-picker {
   display: flex;
   align-items: center;

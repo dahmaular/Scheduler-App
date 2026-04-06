@@ -283,3 +283,115 @@ export function exportPDF(schedules, filename = 'schedule', title = 'Service Sch
   doc.save(`${filename}.pdf`);
 }
 
+// ── ICS — iCalendar format (Google / Outlook / Apple Calendar) ────────────
+//
+// Each service slot becomes one all-day VEVENT:
+//   SUMMARY  = "<ServiceType label> — <ScheduleName>"
+//   DTSTART  = the service date (all-day, DATE format)
+//   DTEND    = next day (required by iCal spec for all-day events)
+//   DESCRIPTION = numbered member list with ★ for team lead
+//   CATEGORIES = service type label
+//
+export function exportICS(schedules, filename = 'schedule', title = 'Service Schedule') {
+  if (!schedules.length) return;
+
+  const SVC_LABEL = {
+    A: '1st & 2nd Service',
+    B: '3rd Service',
+    C: 'Midweek Service',
+  };
+
+  // Group entries by (serviceType, date) so each slot is one calendar event
+  const slotMap = new Map();
+  for (const entry of schedules) {
+    const key = `${entry.serviceType}__${entry.date}`;
+    if (!slotMap.has(key)) {
+      slotMap.set(key, {
+        serviceType: entry.serviceType,
+        date: entry.date,
+        members: [],
+      });
+    }
+    if (entry.member?.name) {
+      const slot = slotMap.get(key);
+      slot.members.push({
+        name: entry.member.name,
+        isLead: slot.members.length === 0,
+      });
+    }
+  }
+
+  // iCal helper: fold long lines at 75 chars (RFC 5545 §3.1)
+  const fold = (line) => {
+    const chunks = [];
+    while (line.length > 75) {
+      chunks.push(line.slice(0, 75));
+      line = ' ' + line.slice(75);
+    }
+    chunks.push(line);
+    return chunks.join('\r\n');
+  };
+
+  // Sanitise text for iCal (escape commas, semicolons, backslashes, newlines)
+  const esc = (s) =>
+    String(s)
+      .replace(/\\/g, '\\\\')
+      .replace(/;/g,  '\\;')
+      .replace(/,/g,  '\\,')
+      .replace(/\n/g, '\\n');
+
+  // Format a JS Date / dayjs as iCal DATE value: YYYYMMDD
+  const icsDate = (dateStr) => dayjs(dateStr).format('YYYYMMDD');
+  const icsDateNext = (dateStr) => dayjs(dateStr).add(1, 'day').format('YYYYMMDD');
+
+  // Static timestamp for DTSTAMP (created now)
+  const now = dayjs().format('YYYYMMDDTHHmmss') + 'Z';
+
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Daystar Christian Centre//Unit Service Planner//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    fold(`X-WR-CALNAME:${esc(title)}`),
+    'X-WR-TIMEZONE:Africa/Lagos',
+  ];
+
+  let uid = 1;
+  for (const slot of [...slotMap.values()].sort((a, b) => (a.date > b.date ? 1 : -1))) {
+    const label    = SVC_LABEL[slot.serviceType] ?? slot.serviceType;
+    const summary  = `${label} — ${title}`;
+    const teamLead = slot.members.find((m) => m.isLead);
+    const others   = slot.members.filter((m) => !m.isLead);
+
+    // Build description: "Team Lead: Name\nMember 2: Name\n..."
+    const descParts = [];
+    if (teamLead) descParts.push(`★ Team Lead: ${teamLead.name}`);
+    others.forEach((m, i) => descParts.push(`Member ${i + 2}: ${m.name}`));
+    const description = descParts.join('\\n');
+
+    lines.push('BEGIN:VEVENT');
+    lines.push(fold(`UID:daystar-sched-${uid++}-${icsDate(slot.date)}-${slot.serviceType}@daystar.app`));
+    lines.push(`DTSTAMP:${now}`);
+    lines.push(`DTSTART;VALUE=DATE:${icsDate(slot.date)}`);
+    lines.push(`DTEND;VALUE=DATE:${icsDateNext(slot.date)}`);
+    lines.push(fold(`SUMMARY:${esc(summary)}`));
+    lines.push(fold(`DESCRIPTION:${esc(description)}`));
+    lines.push(fold(`CATEGORIES:${esc(label)}`));
+    if (teamLead) lines.push(fold(`LOCATION:Daystar Christian Centre`));
+    lines.push('STATUS:CONFIRMED');
+    lines.push('TRANSP:TRANSPARENT');
+    lines.push('END:VEVENT');
+  }
+
+  lines.push('END:VCALENDAR');
+
+  const content = lines.join('\r\n') + '\r\n';
+  const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `${filename}.ics`;
+  a.click();
+  URL.revokeObjectURL(url);
+}

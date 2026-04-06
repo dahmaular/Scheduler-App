@@ -187,6 +187,13 @@ function ScheduleDetailView({ scheduleMeta, onBack, onDeleted }) {
     toast.success('PDF downloaded');
   };
 
+  const handleExportICS = async () => {
+    if (!schedules.length) { toast.error('No data to export'); return; }
+    const { exportICS } = await import('../utils/exportUtils');
+    exportICS(schedules, scheduleMeta.scheduleName.replace(/\s+/g, '-'), scheduleMeta.scheduleName);
+    toast.success('Calendar file (.ics) downloaded — open it to import into Google / Outlook / Apple Calendar');
+  };
+
   return (
     <div className="page schedule-page">
       <div className="page-header">
@@ -198,6 +205,7 @@ function ScheduleDetailView({ scheduleMeta, onBack, onDeleted }) {
           <div className="export-group">
             <button className="btn btn-export" onClick={handleExportCSV}>⬇ CSV</button>
             <button className="btn btn-export" onClick={handleExportPDF}>⬇ PDF</button>
+            <button className="btn btn-export btn-export-ics" onClick={handleExportICS} title="Export to Google / Outlook / Apple Calendar">⬇ Calendar (.ics)</button>
           </div>
           <button className="btn btn-danger" onClick={handleDeleteAll}>Delete</button>
         </div>
