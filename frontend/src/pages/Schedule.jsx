@@ -191,7 +191,7 @@ function ScheduleDetailView({ scheduleMeta, onBack, onDeleted }) {
     if (!schedules.length) { toast.error('No data to export'); return; }
     const { exportICS } = await import('../utils/exportUtils');
     exportICS(schedules, scheduleMeta.scheduleName.replace(/\s+/g, '-'), scheduleMeta.scheduleName);
-    toast.success('Calendar file (.ics) downloaded — open it to import into Google / Outlook / Apple Calendar');
+    toast.success('Calendar file (.ics) downloaded');
   };
 
   return (

@@ -1,12 +1,14 @@
-const express = require('express');
+const express  = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+const cors     = require('cors');
+const cron     = require('node-cron');
 require('dotenv').config();
 
 const memberRoutes   = require('./routes/members');
 const scheduleRoutes = require('./routes/schedules');
 const authRoutes     = require('./routes/auth');
 const protect        = require('./middleware/auth');
+const { sendTomorrowReminders } = require('./jobs/reminderJob');
 
 const app = express();
 
@@ -33,6 +35,19 @@ app.use('/api/auth',      authRoutes);
 app.use('/api/members',   protect, memberRoutes);
 app.use('/api/schedules', protect, scheduleRoutes);
 
+// ── Admin: manual reminder trigger (protected) ───────────────────────────────
+// POST /api/admin/send-reminders
+// Useful on Vercel (no persistent cron) — call via a Vercel Cron Job or manually
+app.post('/api/admin/send-reminders', protect, async (req, res) => {
+  try {
+    const summary = await sendTomorrowReminders();
+    return res.json({ ok: true, ...summary });
+  } catch (err) {
+    console.error('[send-reminders]', err);
+    return res.status(500).json({ ok: false, message: err.message });
+  }
+});
+
 app.get('/', (req, res) => {
   res.json({ message: 'Schedule Planner API is running' });
 });
@@ -47,11 +62,24 @@ async function connectDB() {
   console.log('Connected to MongoDB');
 }
 
-// ── Local dev: start HTTP server ─────────────────────────────────────────────
+// ── Local dev: start HTTP server + cron ──────────────────────────────────────
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 5001;
   connectDB().then(() => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+    // Daily at 08:00 Africa/Lagos time (UTC+1)
+    // Cron: "0 7 * * *" = 07:00 UTC = 08:00 Lagos
+    cron.schedule('0 7 * * *', async () => {
+      console.log('[Cron] Running daily reminder job…');
+      try {
+        await sendTomorrowReminders();
+      } catch (err) {
+        console.error('[Cron] Reminder job error:', err.message);
+      }
+    }, { timezone: 'Africa/Lagos' });
+
+    console.log('[Cron] Daily reminder job scheduled at 08:00 Africa/Lagos');
   }).catch((err) => { console.error(err); process.exit(1); });
 }
 
