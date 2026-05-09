@@ -12,7 +12,7 @@ const { sendReminderEmail } = require('../services/mailService');
  * Returns a summary object: { checked, sent, skipped, errors }
  */
 async function sendTomorrowReminders() {
-  const tomorrow     = dayjs().add(1, 'day');
+  const tomorrow     = dayjs().add(2, 'day');
   const tomorrowDate = tomorrow.format('YYYY-MM-DD');
 
   // Fetch all entries for tomorrow, populating member details

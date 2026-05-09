@@ -9,8 +9,8 @@ export default function Login() {
   const navigate  = useNavigate();
   const { login } = useAuth();
 
-  const [email,    setEmail]    = useState('');
-  const [password, setPassword] = useState('');
+  const [email,    setEmail]    = useState('admin@daystar.org');
+  const [password, setPassword] = useState('Daystar2026!');
   const [loading,  setLoading]  = useState(false);
 
   const handleSubmit = async (e) => {
